@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Death Counter</title>
+	<style type="text/css">
+
+	body {
+  			font-family: 'Nova Mono', monospace;
+  			background: #00b140;
+		}
+
+	h1 {
+  		position: relative;
+  		text-transform: uppercase;
+  		letter-spacing: 6px;
+  		font-size: 10vw;
+  		font-weight: 900;
+  		text-decoration: none;
+  
+  		color: white;
+  		display: inline-block;
+  		background-size: 120% 100%;
+  		-webkit-background-clip: text;
+  		-webkit-text-fill-color: transparent;
+  		-moz-background-clip: text;
+  		-moz-text-fill-color: transparent;
+  		-ms-background-clip: text;
+  		-ms-text-fill-color: transparent;
+  		background-clip: text;
+  		text-fill-color: transparent;
+  		background-image: linear-gradient(45deg, 
+                    #33FFC7, 
+                    #D1F2EB,
+                    #33FFC7);
+
+  		animation: .8s shake infinite alternate;
+		}
+		/* animation */
+		@keyframes shake {
+  		0% { transform: skewX(-3deg); }
+  		5% { transform: skewX(3deg); }
+  		10% { transform: skewX(-3deg); }
+  		15% { transform: skewX(3deg); }
+  		20% { transform: skewX(0deg); }
+  		100% { transform: skewX(0deg); }  
+		}
+
+	</style>
+
+</head>
+<body>
+
+<div id="activity">
+  <h1 id="counter">Deaths:<span class="hits">0</span></h1>
+  <br/>
+  <a href="#" onclick="resetHits()" class="tryagain">RESTART</a>
+  <p>Press spacebar to add death count</p>
+</div> 
+
+
+<script>
+
+	let hits = 0;
+	let hitElement = document.querySelector( '.hits' );
+	let oof = document.createElement("audio");
+	oof.preload = "auto";
+
+	let src = document.createElement("source");
+	src.src = "https://gamespecifications.com/wp-content/uploads/2020/10/roblox-oof-gamespecifications.com_-1.mp3";
+	oof.appendChild(src);
+
+	oof.load();
+	oof.volume = 0.000000;
+	oof.play();
+
+	let play=()=>{
+  	oof.currentTime = 0.01;
+  	oof.volume = 1;
+  	oof.play()
+	}
+
+
+	document.body.onkeyup=(e)=>{
+  	if( e.keyCode == 32 ) {
+    addHit();
+  	}
+	}
+
+	let addHit=()=>{
+  	hits++;
+  	renderHits();
+  	play();
+	}
+
+	let renderHits=()=>{
+  	hitElement.innerHTML = hits;
+	}
+
+	let resetHits=()=>{
+  	hits = 0;
+  	renderHits();
+	}
+		
+</script>
+
+
+</body>
+</html>
